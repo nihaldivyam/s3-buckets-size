@@ -7,6 +7,6 @@ for profile in "${aws_profiles[@]}"; do
     read -rd "\n" -a buckets <<< "$(aws --profile "$profile" s3 ls | cut -d " " -f3)"
     for bucket in "${buckets[@]}"; do
         echo "$bucket"
-        aws --profile "$profile" s3 ls s3://"$bucket" --human-readable --summarize | awk END'{print}'
+        aws --profile "$profile" s3 ls s3://"$bucket" --human-readable --summarize --recursive | awk END'{print}'
     done
 done
